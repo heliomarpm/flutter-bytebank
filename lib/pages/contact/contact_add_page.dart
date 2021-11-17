@@ -4,14 +4,14 @@ import 'package:bytebank/components/pnumber_field.dart';
 import 'package:bytebank/components/ptext_field.dart';
 import 'package:bytebank/database/app_db.dart';
 
-class ContactAdd extends StatefulWidget {
-  const ContactAdd({Key? key}) : super(key: key);
+class ContactAddPage extends StatefulWidget {
+  const ContactAddPage({Key? key}) : super(key: key);
 
   @override
-  _ContactAddState createState() => _ContactAddState();
+  _ContactAddPageState createState() => _ContactAddPageState();
 }
 
-class _ContactAddState extends State<ContactAdd> {
+class _ContactAddPageState extends State<ContactAddPage> {
   final _nameController = TextEditingController();
   final _accountNumberController = TextEditingController();
 
