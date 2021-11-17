@@ -1,3 +1,5 @@
+<base target="_blank">
+
 ![Thumbnail GitHub](https://raw.githubusercontent.com/Kakomo/readme-template/main/Readme-%20Flutter%20Fundamentos.png)
 
 # Bytebank
