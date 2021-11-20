@@ -14,7 +14,7 @@ final client = InterceptedClient.build(
   ],
 );
 
-Future<List<Transaction>> getAll() async {
+Future<List<Transaction>> getAllTransactions() async {
   final Response response = await client
       .get(
         Uri.parse(baseUrl),
