@@ -1,11 +1,11 @@
 import 'package:bytebank/components/busy_indicator.dart';
-import 'package:bytebank/pages/transaction/transaction_add_page.dart';
+import 'package:bytebank/pages/transaction/transaction-add.page.dart';
 import 'package:flutter/material.dart';
 import 'package:bytebank/models/contact.dart';
-import 'package:bytebank/pages/contact/contact_item.dart';
+import 'package:bytebank/pages/contact/contact-item.component.dart';
 import 'package:bytebank/database/app_db.dart';
 
-import 'contact_add_page.dart';
+import 'contact-add.page.dart';
 
 const _titlePage = 'Contatos';
 

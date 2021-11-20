@@ -1,30 +1,10 @@
 import 'dart:convert';
-import 'dart:developer' as developer;
 
+import 'package:bytebank/http/nterceptors/loggin.interceptor.dart';
 import 'package:http/http.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 import 'package:bytebank/models/transaction.dart';
-import 'package:bytebank/models/contact.dart';
 
-class LogginInterceptor implements InterceptorContract {
-  @override
-  Future<RequestData> interceptRequest({required RequestData data}) async {
-    developer.log('Request');
-    developer.log('url: ${data.url}');
-    developer.log('headers: ${data.headers}');
-    developer.log('body: ${data.body}');
-    return data;
-  }
-
-  @override
-  Future<ResponseData> interceptResponse({required ResponseData data}) async {
-    developer.log('Response');
-    developer.log('status code: ${data.statusCode}');
-    developer.log('headers: ${data.headers}');
-    developer.log('body: ${data.body}');
-    return data;
-  }
-}
 
 const baseUrl = 'http://localhost:8080/transaction';
 
@@ -42,17 +22,22 @@ Future<List<Transaction>> getAll() async {
       .timeout(const Duration(seconds: 5));
 
   final List<dynamic> json = jsonDecode(response.body);
-  final List<Transaction> transactions = [];
+  // final List<Transaction> transactions = [];
 
-  for (Map<String, dynamic> item in json) {
-    transactions.add(Transaction.fromMap(item));
-  }
+  // for (Map<String, dynamic> item in json) {
+  //   transactions.add(Transaction.fromMap(item));
+  // }
 
-  return transactions;
+  // return transactions;
+
+  return json
+      .map((item) => Transaction.fromMap(item))
+      .toList();
 }
 
 Future<Transaction> saveTransaction(Transaction transaction) async {
-  final response = await client
+  
+  final Response response = await client
       .post(
         Uri.parse(baseUrl),
         headers: {

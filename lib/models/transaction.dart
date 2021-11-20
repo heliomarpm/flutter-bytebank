@@ -8,7 +8,6 @@ class Transaction {
 
   Transaction(this.value, this.contact);
 
-
   Transaction copyWith({double? value, Contact? contact}) {
     return Transaction(value ?? this.value, contact ?? this.contact);
   }

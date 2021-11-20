@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:bytebank/components/tile_button.dart';
 
-import 'package:bytebank/pages/contact/contact_list_page.dart';
-import 'transaction/transaction_list_page.dart';
+import 'package:bytebank/pages/contact/contact-list.page.dart';
+import 'transaction/transaction-list.page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
