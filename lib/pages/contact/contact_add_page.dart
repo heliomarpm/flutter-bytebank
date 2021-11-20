@@ -21,8 +21,7 @@ class _ContactAddPageState extends State<ContactAddPage> {
       appBar: AppBar(
         title: const Text('New contact'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: SingleChildScrollView(
         child: Column(
           children: [
             PTextField(_nameController, "Nome"),

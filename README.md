@@ -32,7 +32,7 @@ Para desenvolver o projeto, utilizamos as seguintes técnicas e tecnologias:
 
 ### 1 - Fundamentos de Flutter
 
-- [**O que é Flutter**](https://cursos.alura.com.br/o-que-e-flutter--c714) - Video
+- [**O que é Flutter**](https://cursos.alura.com.br/o-que-e-flutter--c714/?target=_) - Video
 - [**Como configurar o ambiente de desenvolvimento**](https://www.alura.com.br/artigos/flutter-como-configurar-o-ambiente-de-desenvolvimento) - Artigo
 - [**Fundamentos de Flutter: Crie o seu primeiro App**](https://cursos.alura.com.br/course/flutter-fundamentos) - Curso 15h
 - [**Como criar um formulário**](https://www.alura.com.br/artigos/criando-formulario-com-flutter) - Artigo

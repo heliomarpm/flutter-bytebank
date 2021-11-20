@@ -12,14 +12,19 @@ Future<Database> getDatabase() async {
   return openDatabase(
     dbPath,
     onCreate: (db, version) {
-      db
-          .execute("CREATE TABLE contato("
-              " id INTEGER PRIMARY KEY, "
-              " nome TEXT, "
-              " num_conta INTEGER"
-              ")")
-          .then((_) => debugPrint('Tabela criada com sucesso'))
-          .catchError((error) => debugPrint('Erro ao criar tabela: $error'));
+      db.execute(
+          "CREATE TABLE contato("
+          " id INTEGER PRIMARY KEY, "
+          " nome TEXT, "
+          " num_conta INTEGER"
+          ")",
+        )
+        .then(
+          (_) => debugPrint('Tabela criada com sucesso'),
+        )
+        .catchError(
+          (error) => debugPrint('Erro ao criar tabela: $error'),
+        );
     },
     onOpen: (db) => debugPrint('Database aberto'),
     version: 1,

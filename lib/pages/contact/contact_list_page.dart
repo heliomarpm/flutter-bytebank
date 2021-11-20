@@ -1,6 +1,8 @@
+import 'package:bytebank/components/busy_indicator.dart';
+import 'package:bytebank/pages/transaction/transaction_add_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bytebank/models/contact.dart';
-import 'package:bytebank/components/contact_item.dart';
+import 'package:bytebank/pages/contact/contact_item.dart';
 import 'package:bytebank/database/app_db.dart';
 
 import 'contact_add_page.dart';
@@ -36,7 +38,7 @@ class _ContactListPageState extends State<ContactListPage> {
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
-              return const Center(child: CircularProgressIndicator());
+              return const BusyIndicator();
 
             case ConnectionState.done:
               if (snapshot.hasData) {
@@ -44,7 +46,12 @@ class _ContactListPageState extends State<ContactListPage> {
 
                 return ListView.builder(
                   itemCount: contatos.length,
-                  itemBuilder: (context, index) => ContactItem(contatos[index]),
+                  itemBuilder: (context, index) =>
+                      ContactItem(contatos[index], onClick: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => TransactionAddPage(contatos[index])
+                    ));
+                  }),
                 );
               } else {
                 //return Center(child: CircularProgressIndicator());
@@ -52,7 +59,7 @@ class _ContactListPageState extends State<ContactListPage> {
               }
 
             default:
-              return const Center(child: Text('Nenhum contato cadastrado'));
+              return const Center(child: Text('Algo de errado não está certo 😁'));
           }
         },
       ),

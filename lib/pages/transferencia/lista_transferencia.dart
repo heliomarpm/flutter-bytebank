@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bytebank/components/item_transferencia.dart';
+import 'package:bytebank/pages/transferencia/item_transferencia.dart';
 import 'package:bytebank/models/transferencia.dart';
 
 import 'cadastra_transferencia.dart';
