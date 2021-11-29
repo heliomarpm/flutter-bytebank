@@ -3,22 +3,24 @@ import 'dart:convert';
 import 'contact.dart';
 
 class Transaction {
+  final String id;
   final double value;
   final Contact contact;
 
-  Transaction(this.value, this.contact);
+  Transaction(this.id, this.value, this.contact);
 
-  Transaction copyWith({double? value, Contact? contact}) {
-    return Transaction(value ?? this.value, contact ?? this.contact);
+  Transaction copyWith({String? id, double? value, Contact? contact}) {
+    return Transaction(id ?? this.id, value ?? this.value, contact ?? this.contact);
   }
 
   Map<String, dynamic> toMap() {
-    return {'value': value, 'contact': contact.toMap()};
+    return {'id': id, 'value': value, 'contact': contact.toMap()};
   }
 
   factory Transaction.fromMap(Map<String, dynamic> map) {
     return Transaction(
-      map['value'],
+      map['id'] as String,
+      map['value'] ,
       Contact.fromMap(map['contact']),
     );
   }
@@ -30,13 +32,14 @@ class Transaction {
 
 
   @override
-  String toString() => 'Transaction(value: $value, contact: $contact)';
+  String toString() => 'Transaction(id: $id, value: $value, contact: $contact)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
     return other is Transaction &&
+        other.id == id &&
         other.value == value &&
         other.contact == contact;
   }

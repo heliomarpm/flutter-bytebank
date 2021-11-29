@@ -1,10 +1,34 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'demo_page.dart';
 import 'pages/home_page.dart';
 
+import 'package:flutter/foundation.dart' show kDebugMode;
+
 //https://material.io/resources/color/
 
-void main() => runApp(const BytebankApp());
+void main() async {
+  runZonedGuarded<Future<void>>(() async{
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+
+    // força o primeiro erro para terminar a configuração do crashlytics
+    // FirebaseCrashlytics.instance.crash();
+
+    if (kDebugMode) {
+      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+    } else {
+      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+      FirebaseCrashlytics.instance.setUserIdentifier('UsuarioLogado');
+      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+    }
+
+    runApp(const BytebankApp());
+  }, (error, stack) => FirebaseCrashlytics.instance.recordError(error, stack));
+}
 
 class DemoApp extends StatelessWidget {
   const DemoApp({Key? key}) : super(key: key);
@@ -22,6 +46,7 @@ class DemoApp extends StatelessWidget {
     );
   }
 }
+
 class BytebankApp extends StatelessWidget {
   const BytebankApp({Key? key}) : super(key: key);
 

@@ -45,21 +45,26 @@ class _ContactListPageState extends State<ContactListPage> {
                 final List<Contact> contatos = snapshot.data;
 
                 return ListView.builder(
-                  itemCount: contatos.length,
-                  itemBuilder: (context, index) =>
-                      ContactItem(contatos[index], onClick: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => TransactionAddPage(contatos[index])
-                    ));
-                  }),
-                );
+                    itemCount: contatos.length,
+                    itemBuilder: (context, index) {
+                      final contact = contatos[index];
+
+                      return ContactItem(contact, onClick: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => TransactionAddPage(contact),
+                          ),
+                        );
+                      });
+                    });
               } else {
                 //return Center(child: CircularProgressIndicator());
                 return const Center(child: Text('Nenhum contato cadastrado'));
               }
 
             default:
-              return const Center(child: Text('Algo de errado não está certo 😁'));
+              return const Center(
+                  child: Text('Algo de errado não está certo 😁'));
           }
         },
       ),
@@ -73,9 +78,7 @@ class _ContactListPageState extends State<ContactListPage> {
                   builder: (context) => const ContactAddPage(),
                 ),
               )
-              .then(
-                (response) => setState(() {}),
-              );
+              .then((response) => setState(() {}));
         },
       ),
     );
