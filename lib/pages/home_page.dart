@@ -1,3 +1,4 @@
+import 'package:bytebank/pages/named/named.page.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:bytebank/components/tile_button.dart';
@@ -38,6 +39,11 @@ class HomePage extends StatelessWidget {
                     'Transações',
                     Icons.monetization_on,
                     onClick: () => _showPage(context, TransactionsListPage()),
+                  ),
+                  TileButton(
+                    'Change Name',
+                    Icons.person,
+                    onClick: () => _showPage(context, const NamedPage()),
                   ),
                 ],
               ),

@@ -1,8 +1,11 @@
 import 'dart:async';
 
+import 'package:bytebank/pages/counter/counter.page.dart';
+import 'package:bytebank/pages/named/named.page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+
 import 'demo_page.dart';
 import 'pages/home_page.dart';
 
@@ -55,23 +58,28 @@ class BytebankApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: const HomePage(),
+      // home: const CounterPage(),
+      // home: const HomePage(),
       title: 'Flutter Demo',
       // theme: ThemeData.dark(),
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        primaryColor: Colors.green[900],
-        // primaryTextTheme: Theme.of(context).primaryTextTheme.apply(
-        //       bodyColor: Colors.black,
-        //       displayColor: Colors.black,
-        //     ),
-        colorScheme: ColorScheme.fromSwatch().copyWith(
-          secondary: Colors.blueAccent[700],
-        ),
-        buttonTheme: ButtonThemeData(
-          buttonColor: Colors.blueAccent[700],
-          textTheme: ButtonTextTheme.primary,
-        ),
+        primarySwatch: Colors.green,
       ),
+      // theme: ThemeData(
+      //   primarySwatch: Colors.blue,
+      //   primaryColor: Colors.green[900],
+      //   // primaryTextTheme: Theme.of(context).primaryTextTheme.apply(
+      //   //       bodyColor: Colors.black,
+      //   //       displayColor: Colors.black,
+      //   //     ),
+      //   colorScheme: ColorScheme.fromSwatch().copyWith(
+      //     secondary: Colors.blueAccent[700],
+      //   ),
+      //   buttonTheme: ButtonThemeData(
+      //     buttonColor: Colors.blueAccent[700],
+      //     textTheme: ButtonTextTheme.primary,
+      //   ),
+      // ),
     );
   }
 }
