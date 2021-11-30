@@ -1,9 +1,11 @@
-import 'package:bytebank/pages/named/named.page.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+
+import 'package:bytebank/pages/named/named.cubit.dart';
+import 'package:bytebank/pages/named/named.page.dart';
 import 'package:bytebank/components/tile_button.dart';
 
 import 'package:bytebank/pages/contact/contact-list.page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'transaction/transaction-list.page.dart';
 
 class HomePage extends StatelessWidget {
@@ -11,9 +13,26 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => NamedCubit("Heliomar Marques"),
+      child: const _HomeView(),
+    );
+  }
+}
+
+class _HomeView extends StatelessWidget {
+  const _HomeView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Dashboard'),
+        title: BlocBuilder<NamedCubit, String>(
+          builder: (context, state) {
+            return Text("Welcome $state");
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -24,28 +43,30 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               child: Image.asset('assets/app_logo.png'),
             ),
-            Container(
-              height: 120,
-              padding: const EdgeInsets.all(6),
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  TileButton(
-                    'Contatos',
-                    Icons.people,
-                    onClick: () => _showPage(context, const ContactListPage()),
-                  ),
-                  TileButton(
-                    'Transações',
-                    Icons.monetization_on,
-                    onClick: () => _showPage(context, TransactionsListPage()),
-                  ),
-                  TileButton(
-                    'Change Name',
-                    Icons.person,
-                    onClick: () => _showPage(context, const NamedPage()),
-                  ),
-                ],
+            SingleChildScrollView(
+              child: Container(
+                height: 120,
+                padding: const EdgeInsets.all(6),
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    TileButton(
+                      'Contatos',
+                      Icons.people,
+                      onClick: () => _showPage(context, const ContactListPage()),
+                    ),
+                    TileButton(
+                      'Transações',
+                      Icons.monetization_on,
+                      onClick: () => _showPage(context, TransactionsListPage()),
+                    ),
+                    TileButton(
+                      'Change Name',
+                      Icons.person,
+                      onClick: () => _showPageBloc<NamedCubit>(context, const NamedPage()),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -74,4 +95,12 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  void _showPageBloc<T extends Cubit>(BuildContext blocContext, Widget page) {
+    Navigator.of(blocContext).push(
+      MaterialPageRoute(
+        builder: (context) => BlocProvider.value(
+            value: BlocProvider.of<T>(blocContext), child: page),
+      ),
+    );
+  }
 }

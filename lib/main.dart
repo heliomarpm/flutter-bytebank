@@ -1,10 +1,9 @@
 import 'dart:async';
 
-import 'package:bytebank/pages/counter/counter.page.dart';
-import 'package:bytebank/pages/named/named.page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'demo_page.dart';
 import 'pages/home_page.dart';
@@ -33,6 +32,15 @@ void main() async {
   }, (error, stack) => FirebaseCrashlytics.instance.recordError(error, stack));
 }
 
+
+class LogObserver extends BlocObserver {
+  @override
+  void onChange(BlocBase bloc, Change change){
+    super.onChange(bloc, change);
+    debugPrint("${bloc.runtimeType} > $change");
+  }
+}
+
 class DemoApp extends StatelessWidget {
   const DemoApp({Key? key}) : super(key: key);
 
@@ -53,8 +61,13 @@ class DemoApp extends StatelessWidget {
 class BytebankApp extends StatelessWidget {
   const BytebankApp({Key? key}) : super(key: key);
 
+    
   @override
   Widget build(BuildContext context) {
+    
+    // na prática evitar log do genero, pois pode vazar informações sensíveis para o log
+    // Bloc.observer = LogObserver();
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: const HomePage(),

@@ -7,10 +7,11 @@ class NamedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => NamedCubit("Heliomar Marques"),
-      child: _NamedView(),
-    );
+    // return BlocProvider(
+    //   create: (_) => NamedCubit("Heliomar Marques"),
+    //   child: _NamedView(),
+    // );
+    return _NamedView();
   }
 }
 
