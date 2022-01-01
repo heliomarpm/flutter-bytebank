@@ -32,6 +32,7 @@ dependencies:
     firebase_crashlytics: ^2.3.0
     flutter:
         sdk: flutter
+    #bloc: ^8.0.1
     flutter_bloc: ^8.0.0
     http: ^0.13.4
     http_interceptor: ^1.0.2

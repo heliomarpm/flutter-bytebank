@@ -6,6 +6,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'demo_page.dart';
+import 'loggin_observer.dart';
 import 'pages/home_page.dart';
 
 import 'package:flutter/foundation.dart' show kDebugMode;
@@ -13,7 +14,7 @@ import 'package:flutter/foundation.dart' show kDebugMode;
 //https://material.io/resources/color/
 
 void main() async {
-  runZonedGuarded<Future<void>>(() async{
+  runZonedGuarded<Future<void>>(() async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp();
 
@@ -21,24 +22,21 @@ void main() async {
     // FirebaseCrashlytics.instance.crash();
 
     if (kDebugMode) {
-      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(false);
+
+      // BlocOverrides.runZoned(
+      //   () => runApp(const BytebankApp()),
+      //   blocObserver: LogginObserver(),
+      // );
+      
     } else {
       await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
       FirebaseCrashlytics.instance.setUserIdentifier('UsuarioLogado');
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+
+      runApp(const BytebankApp());
     }
-
-    runApp(const BytebankApp());
   }, (error, stack) => FirebaseCrashlytics.instance.recordError(error, stack));
-}
-
-
-class LogObserver extends BlocObserver {
-  @override
-  void onChange(BlocBase bloc, Change change){
-    super.onChange(bloc, change);
-    debugPrint("${bloc.runtimeType} > $change");
-  }
 }
 
 class DemoApp extends StatelessWidget {
@@ -61,12 +59,10 @@ class DemoApp extends StatelessWidget {
 class BytebankApp extends StatelessWidget {
   const BytebankApp({Key? key}) : super(key: key);
 
-    
   @override
   Widget build(BuildContext context) {
-    
     // na prática evitar log do genero, pois pode vazar informações sensíveis para o log
-    // Bloc.observer = LogObserver();
+    //Bloc.observer = LogObserver();
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
